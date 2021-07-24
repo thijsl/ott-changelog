@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p The following articles don't have a note:
+  p= article.id
+  p= article.notes
+  a(href=article.link,target='_blank') #{article.link}
+  form(method='POST' action='/update-note')
+    div
+      label(for='note') note:
+      textarea(type='text', placeholder='A note' name='note')
+      input(type='hidden', value=''+article.id name='id')
+
+    button(type='submit') Add note
+  a(href='/unnoted') << Back to Unnoted

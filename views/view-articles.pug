@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST' action='/view-articles')
+    div
+      label(for='startdate') Start Date:
+      input(type='date', value=startDate name='startdate')
+      label(for='enddate') End Date:
+      input(type='date', value=endDate name='enddate')
+      button(type='submit') Change Range
+  table
+    each article in articles
+      tr
+        td= article.sourceId
+        td
+          a(href=article.link) #{article.title}
+        td= new Date(article.date).getFullYear() + "/" + (new Date(article.date).getMonth()+1) + "/" + new Date(article.date).getDate()
+        td= article.notes

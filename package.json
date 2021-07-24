@@ -1,0 +1,26 @@
+{
+  "name": "ott-changelog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "install": "^0.13.0",
+    "jsdom": "^16.2.1",
+    "lowdb": "1.0.0",
+    "markdown-table": "^2.0.0",
+    "moment": "^2.24.0",
+    "morgan": "~1.9.1",
+    "npm": "^6.14.4",
+    "pug": "2.0.0-beta11",
+    "puppeteer": "2.1.1",
+    "slugify": "^1.4.0",
+    "write": "^2.0.0",
+    "xmldom": "^0.3.0"
+  }
+}

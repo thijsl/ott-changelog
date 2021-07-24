@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST' action='/unnoted')
+    div
+      label(for='startdate') Start Date:
+      input(type='date', value=startDate name='startdate')
+      label(for='enddate') End Date:
+      input(type='date', value=endDate name='enddate')
+      button(type='submit') Change Range
+  p The following articles don't have a note:
+  table
+    each article in articles
+      tr
+        td
+          a(href='/update-note?id='+article.id) #{article.id}
+        td= article.title
+        td= article.sourceId
+        td= new Date(article.date).getFullYear() + "/" + (new Date(article.date).getMonth()+1) + "/" + new Date(article.date).getDate()
+        td= article.link

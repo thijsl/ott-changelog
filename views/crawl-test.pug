@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST' action='/crawl-test')
+    div
+      label(for='fun') Function:
+      textarea(type='text', placeholder='function parse() { }' name='fun')
+      label(for='id') ID:
+      input(type='text', placeholder='releaseNotes1242' name='id')
+      label(for='link') Link:
+      input(type='text', placeholder='https://' name='link')
+      label(for='prettyName') Pretty Name:
+      input(type='text', placeholder='Release Notes 1242' name='prettyName')
+      label(for='sourceId') Source ID:
+      input(type='text', placeholder='Players' name='sourceId')
+      label(for='querySelectorParam') Query Selector Param:
+      input(type='text', placeholder='Query Selector Param' name='querySelectorParam')
+      label(for='userAgent') User Agent:
+      input(type='text', placeholder='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/80.0.3987.0 Safari/537.36' name='userAgent')
+
+    button(type='submit') Test Function
