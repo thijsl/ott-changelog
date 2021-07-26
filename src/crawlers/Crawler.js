@@ -71,6 +71,7 @@ class Crawler {
             console.log("new articles");
             console.log(newArticles);
             browser.close();
+            console.log("Finished crawling!");
         })();
     }
 

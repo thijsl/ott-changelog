@@ -6,13 +6,13 @@ class HLSSpec extends HTMLPage {
         super(url, content);
     }
 
-    // https://tools.ietf.org/html/draft-pantos-hls-rfc8216bis
+    // https://datatracker.ietf.org/doc/html/draft-pantos-hls-rfc8216bis
     parse() {
         const article = {
-            title: this.document.querySelectorAll('pre h1')[1].textContent.trim(),
-            link: "https://tools.ietf.org/html/"+this.document.querySelectorAll('.noprint a')[this.document.querySelectorAll('.noprint a').length-2].href.split('./')[1],
+            title: this.document.querySelectorAll('.h1')[1].textContent.trim(),
+            link: this.document.querySelectorAll('.noprint a')[this.document.querySelectorAll('.noprint a').length-2].href,
             date: Date.now(),
-            id: this.document.querySelectorAll('pre h1')[1].textContent.trim()
+            id: this.document.querySelectorAll('.h1')[1].textContent.trim()
         };
         return [article];
     }

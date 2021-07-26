@@ -6,12 +6,12 @@ class XboxOneUpdatesList extends HTMLPage {
         super(url, content);
     }
 
-    // https://beta.support.xbox.com/help/hardware-network/settings-updates/whats-new-xbox-one-system-updates
+    // https://support.xbox.com/en-US/help/hardware-network/settings-updates/whats-new-xbox-one-system-updates
     parse() {
-        let versions = this.document.body.querySelectorAll('.ms-GroupHeader-title');
+        let versions = this.document.body.querySelectorAll('.expander-104');
         let articles = [];
         for (let i = 0; i < versions.length; i++) {
-            let date = versions[i].textContent.trim();
+            let date = versions[i].querySelectorAll('.ms-ExpanderHeader-title')[i].textContent;
             if (date.indexOf(" date") > -1) {
                 let article = {
                     title: versions[i+1].textContent.trim(),
