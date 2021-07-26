@@ -18,7 +18,7 @@
     "morgan": "~1.9.1",
     "npm": "^6.14.4",
     "pug": "2.0.0-beta11",
-    "puppeteer": "2.1.1",
+    "puppeteer": "10.1.0",
     "slugify": "^1.4.0",
     "write": "^2.0.0",
     "xmldom": "^0.3.0"
