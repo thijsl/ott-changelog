@@ -6,7 +6,7 @@ class Database {
     constructor() {
         const adapter = new FileSync('db.json');
         this.db = low(adapter);
-        this.db.defaults({articles: [], errors: []})
+        this.db.defaults({articles: [], errors: [], statistics: []})
             .write();
     }
 

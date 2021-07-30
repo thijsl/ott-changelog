@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
+// moment should be replaced with luxon
 const moment = require('moment');
+const { DateTime } = require("luxon");
+
 const Crawler = require('../crawlers/Crawler');
 let List;
 try {
@@ -11,16 +15,24 @@ catch (e) {
 }
 const Markdown = require('../util/format/Markdown');
 const Article = require('../models/Article');
+const Statistics = require('../models/Statistics');
 const write = require('write');
 
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Index'});
+  let statistics = Statistics.getCrawlerLastRunDate();
+  let lastRunDate = null;
+
+  if (statistics) {
+    lastRunDate = DateTime.fromMillis(statistics.runDate);
+  }
+
+  res.render('index', {title: 'Index', lastRunDate: lastRunDate});
 });
 
 /* GET home page. */
 router.get('/crawl', function (req, res, next) {
-    res.render('index', {title: 'Crawl Articles'});
-    Crawler.crawl();
+  res.render('crawl', {title: 'Crawl Articles'});
+  Crawler.crawl();
 });
 
 router.all('/unnoted', function (req, res, next) {
@@ -76,9 +88,20 @@ router.all('/view-articles', function (req, res, next) {
 });
 
 router.get('/get-resources', function (req, res, next) {
-    res.render('index', {title: 'Get Resources'});
-    const resources = List.getAllResources();
-    console.log(resources);
+
+  let statistics = Statistics.getCrawlerLastRunDate();
+  let lastRunDate = null;
+  let resources = null;
+
+  if (statistics) {
+    lastRunDate = DateTime.fromMillis(statistics.runDate);
+    resources = statistics.resources;
+  } else {
+    resources = List.getList();
+  }
+
+  res.render('get-resources', {title: 'Get Resources', lastRunDate: lastRunDate, resources: resources});
+  //console.log(resources);
 });
 
 router.get('/crawl-test', function (req, res, next) {

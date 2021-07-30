@@ -5,6 +5,7 @@ class Crawler {
     static crawl() {
         const Article = require("../models/Article");
         const Error = require("../models/Error");
+        const Statistics = require("../models/Statistics");
         const slugify = require('slugify');
         let list;
         try {
@@ -36,6 +37,7 @@ class Crawler {
                     let source = sources[i];
 
                     let articles = await this.crawlSource(page, source);
+                    source.numberOfArticles = articles.length;
 
                     // console.log("articles", articles);
                     if (articles.length == 0) {
@@ -71,7 +73,13 @@ class Crawler {
             console.log("new articles");
             console.log(newArticles);
             browser.close();
-            console.log("Finished crawling!");
+  
+            Statistics.add({
+              runDate: Date.now(),
+              resources: list
+            });
+
+            console.log("Crawler finished!");
         })();
     }
 
