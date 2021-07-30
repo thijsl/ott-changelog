@@ -7,21 +7,26 @@ class SafariReleaseNotesList extends HTMLPage {
     }
 
     // https://developer.apple.com/documentation/safari_release_notes
+    // https://developer.apple.com/tutorials/data/documentation/safari-release-notes.json
+    
     parse() {
-        let tasks = JSON.parse(this.document.body.querySelectorAll("#bootstrap-data")[0].innerHTML).tasks;
+        let document = JSON.parse(this.content.text);
         let articles = [];
-        for (let i = 0; i < tasks.length; i++) {
-            let task = tasks[i];
-            for (let j = 0; j < task.symbols.length; j++) {
-                let symbol = task.symbols[j];
-                let article = {
-                    title: symbol.title.content,
-                    link: this.url.split("/documentation")[0] + "/" + symbol.paths[0],
-                    date: Date.now(),
-                    id: symbol.title.content
-                };
-                articles.push(article);
+
+        for (let i = 0; i < document.topicSections.length; i++) {
+            let tasks = document.topicSections[i];
+
+            for (let j = 0; j < tasks.identifiers.length; j++) {
+              let task = document.references[tasks.identifiers[j]];
+              let article = {
+                title: task.title,
+                link: this.url.split("/tutorials")[0] + task.url,
+                date: Date.now(),
+                id: task.identifier
+              };
+              articles.push(article);
             }
+
         }
         return articles;
     }
