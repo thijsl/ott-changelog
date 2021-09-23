@@ -6,22 +6,24 @@ class GoogleWebUpdatesList extends HTMLPage {
         super(url, content);
     }
 
-    // https://developers.google.com/web/updates/
+    // https://developer.chrome.com/blog/
     parse() {
-        let divs = this.document.body.querySelectorAll('.devsite-landing-row-item-body > a');
-        let articles = [];
-        for (let i = 0; i < divs.length; i++) {
-            let title = divs[i].querySelector('h3').innerHTML.trim();
-            let date = divs[i].href.split("updates/")[1].split("/");
-            date = new Date(date[0]+"/"+date[1]).getTime();
-            if (isNaN(date)) {
-                date = Date.now();
-            }
-            let article = {
-                title: title,
-                link: this.url.split("/web/updates/")[0] + divs[i].href,
-                date: date
-            };
+      let divs = this.document.body.querySelectorAll('.blog-card');
+      let articles = [];
+      for (let i = 0; i < divs.length; i++) {
+        let title = divs[i].querySelector('h2 a').innerText;
+        let link = divs[i].querySelector('h2 a').href;
+        let date = null;
+        if (divs[i].querySelector('time')) {
+          date = divs[i].querySelector('time').innerText;
+          date = new Date(date);
+        }
+
+        let article = {
+            title: title,
+            link: link,
+            date: date
+        };
             articles.push(article);
         }
         this.articles = articles;

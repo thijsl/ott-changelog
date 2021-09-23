@@ -6,26 +6,30 @@ class XcodeReleaseNotesList extends HTMLPage {
         super(url, content);
     }
 
-    // https://developer.apple.com/documentation/xcode_release_notes
-    parse() {
-        let divs = this.document.body.querySelectorAll('.task-topic-info a');
-        let articles = [];
-        for (let i = 0; i < divs.length; i++) {
-            let title = divs[i].textContent.split("Article");
-            if (title.length > 1) {
-                title = title[1];
-                let article = {
-                    title: title,
-                    link: this.url + "/" + divs[i].href.split("/")[3],
-                    date: Date.now(),
-                    id: title
-                };
-                articles.push(article);
-            }
-        }
-        return articles;
-    }
+    // https://developer.apple.com/documentation/xcode-release-notes
+    // https://developer.apple.com/tutorials/data/documentation/xcode-release-notes.json
 
+    parse() {
+      let document = JSON.parse(this.content.text);
+      let articles = [];
+
+      for (let i = 0; i < document.topicSections.length; i++) {
+          let tasks = document.topicSections[i];
+
+          for (let j = 0; j < tasks.identifiers.length; j++) {
+            let task = document.references[tasks.identifiers[j]];
+            let article = {
+              title: task.title,
+              link: this.url.split("/tutorials")[0] + task.url,
+              date: Date.now(),
+              id: task.identifier
+            };
+            articles.push(article);
+          }
+
+      }
+      return articles;
+  }
 }
 
 module.exports = XcodeReleaseNotesList;

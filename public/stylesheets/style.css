@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  padding-bottom: 8px;
+  text-align: left;
+}
+
+.line-bottom {
+  border-bottom: 1px solid black;
+}
+
+td {
+  vertical-align: top;
+}

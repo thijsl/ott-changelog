@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+  ul
+    li
+      a(href="/crawl") Crawl
+    li
+      a(href="/unnoted") Unnoted
+    li
+      a(href="/view-articles") View Articles
+    li
+      a(href="/get-resources") Get Resources
+  if lastRunDate
+    p="Resources crawled on "+ lastRunDate.toFormat("d LLLL y T (z)")
+  else
+    p="Crawler has not yet run successfully"
+  table
+    thead 
+      tr
+        th Category
+        th Resource Name
+        th # of articles found
+    each resource in resources
+      tr(class="line-bottom")
+        td=resource.prettyName
+        td
+        td
+      each subresource in resource.list
+        tr
+          td
+          td
+            a(href=subresource.link) #{subresource.prettyName}
+          td=subresource.numberOfArticles
