@@ -106,7 +106,8 @@ class Crawler {
 
         if (source.children) {
             for (let j = 0; j < articles.length; j++) {
-                await page.goto(articles[j].link);
+              
+                await page.goto(articles[j].link, { waitUntil: 'networkidle2' });
 
                 const content = await page.evaluate(() => {
                     return {

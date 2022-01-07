@@ -14,7 +14,7 @@ class Bitmovin extends HTMLPage {
             let item = items[i];
             let article = {
                 title: item.querySelector('h2 a').textContent.trim(),
-                date: new Date(item.querySelector('a time').textContent.trim()).getTime(),
+                date: new Date(item.querySelector('.post-date').textContent.trim()).getTime(),
                 link: item.querySelector('h2 a').href
             };
             articles.push(article);
