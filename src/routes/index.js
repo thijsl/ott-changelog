@@ -25,23 +25,24 @@ router.get('/', function (req, res, next) {
   if (statistics) {
     lastRunDate = DateTime.fromMillis(statistics.runDate);
   }
+  console.log("Last crawl date is", lastRunDate);
 
-  res.render('index', {title: 'Index', lastRunDate: lastRunDate});
+  res.render('index', {title: 'OTT Changelog', lastRunDate: lastRunDate});
 });
 
 /* GET home page. */
-router.get('/crawl', function (req, res, next) {
-  res.render('crawl', {title: 'Crawl Articles'});
-  Crawler.crawl();
+router.get('/articles/crawl', function (req, res, next) {
+  res.render('articles-crawl', {title: 'Crawl Articles'});
+  // Crawler.crawl();
 });
 
-router.all('/unnoted', function (req, res, next) {
+router.all('/articles/review', function (req, res, next) {
     let startDate = req.body.startdate || moment().startOf('week').format("YYYY-MM-DD");
     let endDate = req.body.enddate || moment().endOf('week').add(1, 'days').format("YYYY-MM-DD");
     let articles = Article.getAllByFilter(function (o) {
         return ((o.date > new Date(startDate).getTime() && o.date < new Date(endDate).getTime())  && (o.notes == null) && (!o.ignore))
     });
-    res.render('unnoted', {title: 'Unnoted', articles: articles, startDate: startDate, endDate: endDate});
+    res.render('articles-review', {title: 'Review Articles', articles: articles, startDate: startDate, endDate: endDate});
 });
 
 router.get('/update-note', function (req, res, next) {
@@ -76,7 +77,7 @@ router.post('/update-note', function (req, res, next) {
     res.render('update-article', {title: 'Add note to ' + article.title, article: article});
 });
 
-router.all('/view-articles', function (req, res, next) {
+router.all('/articles/view', function (req, res, next) {
     let startDate = req.body.startdate || moment().startOf('week').format("YYYY-MM-DD");
     let endDate = req.body.enddate || moment().endOf('week').add(1, 'days').format("YYYY-MM-DD");
     let articles = Article.getAllByFilter(function (o) {
@@ -84,10 +85,10 @@ router.all('/view-articles', function (req, res, next) {
     });
     const mdTable = Markdown.format(articles);
     write("articles.md", mdTable, { overwrite: true });
-    res.render('view-articles', {title: 'Articles', articles: articles, startDate: startDate, endDate: endDate});
+    res.render('articles-view', {title: 'Articles', articles: articles, startDate: startDate, endDate: endDate});
 });
 
-router.get('/get-resources', function (req, res, next) {
+router.get('/resources/all', function (req, res, next) {
 
   let statistics = Statistics.getCrawlerLastRunDate();
   let lastRunDate = null;
@@ -100,7 +101,7 @@ router.get('/get-resources', function (req, res, next) {
     resources = List.getList();
   }
 
-  res.render('get-resources', {title: 'Get Resources', lastRunDate: lastRunDate, resources: resources});
+  res.render('resources-all', {title: 'All Resources', lastRunDate: lastRunDate, resources: resources});
   //console.log(resources);
 });
 

@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  a(href='/') << Index
   h1= title
   if lastRunDate
     p="Crawler last ran on "+ lastRunDate.toFormat("d LLLL y T (z)")
@@ -15,3 +16,5 @@ block content
       a(href="/view-articles") View Articles
     li
       a(href="/get-resources") Get Resources
+
+  script(src='/javascripts/crawl.js')
