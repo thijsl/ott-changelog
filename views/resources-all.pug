@@ -1,16 +1,8 @@
 extends layout
 
 block content
+  a(href='/') << Index
   h1= title
-  ul
-    li
-      a(href="/crawl") Crawl
-    li
-      a(href="/unnoted") Unnoted
-    li
-      a(href="/view-articles") View Articles
-    li
-      a(href="/get-resources") Get Resources
   if lastRunDate
     p="Resources crawled on "+ lastRunDate.toFormat("d LLLL y T (z)")
   else

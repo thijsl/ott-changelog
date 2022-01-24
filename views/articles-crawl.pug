@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  a(href='/') << Index
+  h1= title
+  if lastRunDate
+    p="Crawler last ran on "+ lastRunDate.toFormat("d LLLL y T (z)")
+
+  script(src='/js/crawl.js')
