@@ -51,9 +51,12 @@ const crawlList = (list) => {
                 .then(data => {
                     console.log(el2.prettyName, data);
                     const nbOfCrawledArticles = data.articles.length;
+                    const newArticles = data.newArticles;
                     const id = "r-"+i1+"-"+i2;
-                    if (nbOfCrawledArticles > 0) {
-                        document.getElementById(id).querySelector("span").innerText = `🟢`;
+                    if (nbOfCrawledArticles > 0 && newArticles > 0) {
+                        document.getElementById(id).querySelector("span").innerText = `🟢 (${newArticles} articles added)`;
+                    } else if (nbOfCrawledArticles > 0 && newArticles == 0) {
+                        document.getElementById(id).querySelector("span").innerText = `🟠 (0 articles added)`;
                     } else {
                         document.getElementById(id).querySelector("span").innerText = `🔴 (0 articles crawled)`;
                     }

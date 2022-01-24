@@ -1,4 +1,7 @@
 const puppeteer = require('puppeteer');
+const Error = require("../models/Error");
+const slugify = require("slugify");
+const Article = require("../models/Article");
 
 class Crawler {
 
@@ -94,8 +97,39 @@ class Crawler {
             console.log(e)
         }
         const source = List.getSourceById(id);
+        // get all articles
         let articles = await this.crawlSource(page, source);
-        return {"articles": articles};
+        // add to db
+
+        if (articles.length == 0) {
+            Error.add({
+                type: "No articles found.",
+                sourceId: source.id,
+                date: Date.now()
+            });
+            return {
+                "articles": 0,
+                "newArticles": 0
+            };
+        }
+        let newArticles = 0;
+        for (let i = 0; i < articles.length; i++) {
+            let article = articles[i];
+            if (!article.title) {
+                Error.add({
+                    type: "No article title found.",
+                    sourceId: source.id,
+                    date: Date.now()
+                });
+            }
+            article.id = (source.id + "-" + slugify(article.title || ""));
+            article.sourceId = source.id;
+            article = Article.add(article);
+            if (article) {
+                newArticles++;
+            }
+        }
+        return {"articles": articles, "newArticles": newArticles};
     }
 
     static async crawlSource(page, source) {
