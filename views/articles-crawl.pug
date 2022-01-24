@@ -5,16 +5,5 @@ block content
   h1= title
   if lastRunDate
     p="Crawler last ran on "+ lastRunDate.toFormat("d LLLL y T (z)")
-  else
-    p="Crawler is running ..."
-  ul
-    li
-      a(href="/crawl") Crawl
-    li
-      a(href="/unnoted") Unnoted
-    li
-      a(href="/view-articles") View Articles
-    li
-      a(href="/get-resources") Get Resources
 
-  script(src='/javascripts/crawl.js')
+  script(src='/js/crawl.js')

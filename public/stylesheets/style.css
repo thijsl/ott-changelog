@@ -23,3 +23,15 @@ th {
 td {
   vertical-align: top;
 }
+
+#crawl-progress {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  background: darkgrey;
+  padding: 5px;
+}
+
+#crawl-progress.complete {
+  background: darkseagreen;
+}
