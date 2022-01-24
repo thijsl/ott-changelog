@@ -46,6 +46,18 @@ class List {
         return "The following " + count + " sources are consulted:\n"+output;
     }
 
+    static getSourceById(id) {
+        let list = this.getList();
+        for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < list[i].list.length; j++) {
+                const source = list[i].list[j];
+                if (source.id == id) {
+                    return source;
+                }
+            }
+        }
+    }
+
 }
 
 module.exports = List;

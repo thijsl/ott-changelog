@@ -83,6 +83,21 @@ class Crawler {
         })();
     }
 
+    static async crawlSourceById(id) {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(60000);
+        let List;
+        try {
+            List = require('./List.js');
+        } catch (e) {
+            console.log(e)
+        }
+        const source = List.getSourceById(id);
+        let articles = await this.crawlSource(page, source);
+        return {"articles": articles};
+    }
+
     static async crawlSource(page, source) {
         const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/80.0.3987.0 Safari/537.36";
         // check if different user-agent is needed

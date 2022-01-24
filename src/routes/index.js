@@ -122,4 +122,17 @@ router.post('/crawl-test', async function (req, res, next) {
     res.render('crawl-test', {title: 'Crawl test'});
 });
 
+router.get('/crawl-list', async function(req, res) {
+    const list = List.getList();
+    res.json(list);
+});
+
+router.post("/crawl-source", async function(req, res) {
+    const source = req.body;
+    source.mod = "2";
+    const articles = await Crawler.crawlSourceById(source.id);
+    console.log("articles", articles);
+    res.json(articles);
+})
+
 module.exports = router;
