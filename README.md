@@ -1,13 +1,20 @@
-# Currently unmaintained
+# ott-changelog
 
-This project is no longer maintained by [@thijsl_](https://twitter.com/thijsl_). Reach out through https://ottball.com/about/#contact if you're interested in helping to maintain this project.
+The **OTT Changelog** is a parser that crawls websites related to OTT technology.
 
-## ott-changelog
-
-The OTT Changelog was a weekly OTT blog series published at https://ottball.com.
+Additionally, the OTT Changelog _was_ a weekly OTT blog series published at https://ottball.com.
 After stopping this series, the older posts were collected at https://ottball.com/ott-changelog/.
+This project now hosts the technology that was powering that blog series.
 
-This project hosts the technology that is used to crawl the websites related to those series, and facilitate the process.
+## Roadmap
+
+* Add a /articles/get?sourceId=<sourceId> page that lists all articles for a specific source (e.g. HLS), and sorts them from newest to oldest.
+* Open the correct /articles/get?sourceId=<sourceId> page when clicking the source ID in the /articles/crawl list.
+* Change DB from `lowdb` to MongoDB.
+  * Allow users to configure https://www.mongodb.com/atlas/database through a login.
+  If these credentials are available, uses that cloud database instead of the local MongoDB storage.
+* Improve the UX of reviewing articles.
+* Add automatic "CRON"-like crawling, and automatically email (e.g. weekly) digest.
 
 ## Usage
 
