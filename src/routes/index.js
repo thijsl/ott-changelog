@@ -98,13 +98,22 @@ router.get('/resources/all', function (req, res, next) {
 
   if (statistics) {
     lastRunDate = DateTime.fromMillis(statistics.runDate);
-    resources = statistics.resources;
-  } else {
-    resources = List.getList();
   }
-
+  resources = List.getList();
+  function enrichWithNbOfArticles(list) {
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list[i].list.length; j++) {
+            let source = list[i].list[j];
+            let nbOfArticles = Article.getAllByFilter( (o) => {
+                return (o.sourceId == source.id)
+            }).length;
+            source.numberOfArticles = nbOfArticles;
+        }
+    }
+    return list;
+  }
+  resources = enrichWithNbOfArticles(resources);
   res.render('resources-all', {title: 'All Resources', lastRunDate: lastRunDate, resources: resources});
-  //console.log(resources);
 });
 
 router.get('/crawl-test', function (req, res, next) {
