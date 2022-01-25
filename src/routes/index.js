@@ -21,18 +21,20 @@ const write = require('write');
 router.get('/', function (req, res, next) {
   let statistics = Statistics.getCrawlerLastRunDate();
   let lastRunDate = null;
-
   if (statistics) {
     lastRunDate = DateTime.fromMillis(statistics.runDate);
   }
-  console.log("Last crawl date is", lastRunDate);
-
   res.render('index', {title: 'OTT Changelog', lastRunDate: lastRunDate});
 });
 
 /* GET home page. */
 router.get('/articles/crawl', function (req, res, next) {
-  res.render('articles-crawl', {title: 'Crawl Articles'});
+  let statistics = Statistics.getCrawlerLastRunDate();
+  let lastRunDate = null;
+  if (statistics) {
+    lastRunDate = DateTime.fromMillis(statistics.runDate);
+  }
+  res.render('articles-crawl', {title: 'Crawl Articles', lastRunDate: lastRunDate});
   // Crawler.crawl();
 });
 
@@ -133,5 +135,10 @@ router.post("/crawl-source", async function(req, res) {
     console.log("data", data);
     res.json(data);
 })
+
+router.post("/articles/crawl/complete", async function(req, res) {
+    const crawlComplete = await Crawler.complete();
+    res.json(crawlComplete);
+});
 
 module.exports = router;

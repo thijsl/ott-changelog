@@ -24444,5 +24444,22 @@
       "date": 1643068512239
     }
   ],
-  "statistics": []
+  "statistics": [
+    {
+      "runDate": 1643072359586,
+      "resources": []
+    },
+    {
+      "runDate": 1643072382697,
+      "resources": []
+    },
+    {
+      "runDate": 1643072435070,
+      "resources": []
+    },
+    {
+      "runDate": 1643072549091,
+      "resources": []
+    }
+  ]
 }

@@ -4,8 +4,6 @@ block content
   h1= title
   if lastRunDate
     p="Crawler last ran on "+ lastRunDate.toFormat("d LLLL y T (z)")
-  else
-    p="Crawler has not yet run successfully"
   ul
     li
       a(href="/articles/crawl") Crawl Articles

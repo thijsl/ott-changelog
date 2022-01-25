@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const Error = require("../models/Error");
 const slugify = require("slugify");
 const Article = require("../models/Article");
+const Statistics = require("../models/Statistics");
 
 class Crawler {
 
@@ -209,6 +210,13 @@ class Crawler {
 
             browser.close();
             return articles;
+    }
+
+    static async complete() {
+        return Statistics.add({
+            runDate: Date.now(),
+            resources: []
+        });
     }
 
 }

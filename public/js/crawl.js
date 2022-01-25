@@ -85,6 +85,10 @@ const progress = {
         if (!progressDiv.classList.contains("complete")) {
             progressDiv.classList.add("complete");
         }
+        postData('/articles/crawl/complete', {})
+            .then(result => {
+                console.log("complete", result);
+            });
     }
 }
 
