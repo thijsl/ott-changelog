@@ -16,7 +16,7 @@ class AzureMediaServicesReleases extends HTMLPage {
             if (isDate != 'Invalid Date') {
                 let article = {
                     title: moment(isDate).format("MMMM YYYY"),
-                    date: isDate.getTime(),
+                    date: isDate,
                     link: this.url
                 };
                 articles.push(article);

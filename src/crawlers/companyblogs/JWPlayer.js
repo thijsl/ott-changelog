@@ -14,7 +14,7 @@ class JWPlayer extends HTMLPage {
             let item = items[i];
             let article = {
                 title: item.querySelector('.title').textContent.trim(),
-                date: new Date(item.querySelector('.post-date').getAttribute('datetime')).getTime(),
+                date: new Date(item.querySelector('.post-date').getAttribute('datetime')),
                 link: this.url + item.href.split("/blog/")[1]
             };
             articles.push(article);
@@ -57,7 +57,7 @@ class JWPlayer extends HTMLPage {
 
             let article = {
                 title: title,
-                date: new Date(date).getTime(),
+                date: new Date(date),
                 link: link
             };
             articles.push(article);

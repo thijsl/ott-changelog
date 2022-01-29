@@ -7,7 +7,7 @@ class WebKitBlogArticle extends HTMLPage {
     }
 
     parse(article) {
-        article.date = new Date(this.document.body.querySelector('.date').innerHTML).getTime();
+        article.date = new Date(this.document.body.querySelector('.date').innerHTML);
         return article;
     }
 

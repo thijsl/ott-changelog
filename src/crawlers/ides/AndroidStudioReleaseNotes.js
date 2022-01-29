@@ -20,7 +20,7 @@ class AndroidStudioReleaseNotes extends HTMLPage {
             let article = {
                 title: title,
                 link: this.url + "#" + divs[i].id,
-                date: new Date(date).getTime()
+                date: new Date(date)
             };
             articles.push(article);
         }

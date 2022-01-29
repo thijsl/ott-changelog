@@ -15,7 +15,7 @@ class DashIF extends HTMLPage {
             let title = line.slice(3, line.length).join(" ").trim().replace("– ", "");
             let article = {
                 title: title,
-                date: new Date(line[0] + " " + line[1] + " " + line[2]).getTime(),
+                date: new Date(line[0] + " " + line[1] + " " + line[2]),
                 link: this.url
             };
             articles.push(article);

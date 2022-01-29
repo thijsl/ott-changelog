@@ -14,7 +14,7 @@ class FireTVDocumentationChanges extends HTMLPage {
             let line = items[i].querySelectorAll('td');
             let title = "Update to " + line[1].textContent.trim();
             let notes = [line[2].textContent.trim()];
-            let date = new Date(line[0].textContent.trim()).getTime();
+            let date = new Date(line[0].textContent.trim());
             let article = {
                 title: title,
                 date: date,

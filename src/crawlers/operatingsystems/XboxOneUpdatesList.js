@@ -17,7 +17,7 @@ class XboxOneUpdatesList extends HTMLPage {
             if (date.indexOf(" date") > -1) {
                 let article = {
                     title: version[1].textContent,
-                    date: new Date(date.split(" ")[2]).getTime(),
+                    date: new Date(date.split(" ")[2]),
                     link: this.url
                 };
                 articles.push(article);

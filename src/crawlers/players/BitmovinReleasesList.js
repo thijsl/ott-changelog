@@ -23,7 +23,7 @@ class BitmovinReleasesList extends HTMLPage {
             const article = {
                 title: entry.title,
                 link: this.url + "/" + entry.slug,
-                date: new Date(entry.availableFrom).getTime()
+                date: new Date(entry.availableFrom)
             };
             articles.push(article);
         }

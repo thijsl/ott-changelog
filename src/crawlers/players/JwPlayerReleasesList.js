@@ -16,9 +16,9 @@ class JwPlayerReleasesList extends HTMLPage {
                 let id;
                 let date = versions[j].parentNode.getElementsByClassName('release-date');
                 if (date && date[0] && date[0].innerHTML) {
-                    date = new Date(date[0].innerHTML.split(": ")[1]).getTime();
+                    date = new Date(date[0].innerHTML.split(": ")[1]);
                 } else {
-                    date = Date.now();
+                    date = new Date();
                     id = date;
                 }
                 const article = {

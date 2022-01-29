@@ -15,7 +15,7 @@ class JuvoPlayerReleaseNotesList extends HTMLPage {
                 var article = {
                     title: divs[i].innerHTML,
                     link: this.url,
-                    date: Date.now(),
+                    date: new Date(),
                     id: divs[i].innerHTML
                 };
                 articles.push(article);

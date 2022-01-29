@@ -21,7 +21,7 @@ class XcodeReleaseNotesList extends HTMLPage {
             let article = {
               title: task.title,
               link: this.url.split("/tutorials")[0] + task.url,
-              date: Date.now(),
+              date: new Date(),
               id: task.identifier
             };
             articles.push(article);

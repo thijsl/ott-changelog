@@ -16,7 +16,7 @@ class NvidiaAndroidTVReleaseNotes extends HTMLPage {
                 let article = {
                     title: (title.textContent.trim()),
                     link: this.url,
-                    date: new Date(((divs[i].querySelector('.date') && divs[i].querySelector('.date').textContent.trim()))).getTime()
+                    date: new Date(((divs[i].querySelector('.date') && divs[i].querySelector('.date').textContent.trim())))
                 };
                 articles.push(article);
             }

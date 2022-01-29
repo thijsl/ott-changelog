@@ -26,7 +26,7 @@ class RadiantMediaPlayerReleasesList extends HTMLPage {
                     id: id,
                     title: release[0],
                     link: this.url + "#" + releases[i].getAttribute("id"),
-                    date: new Date(date).getTime()
+                    date: new Date(date)
                 };
                 articles.push(article);
             }

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const { MongoClient } = require("mongodb");
 
 // moment should be replaced with luxon
 const moment = require('moment');
@@ -18,50 +19,50 @@ const Article = require('../models/Article');
 const Statistics = require('../models/Statistics');
 const write = require('write');
 
-router.get('/', function (req, res, next) {
-  let statistics = Statistics.getCrawlerLastRunDate();
+const MongoDB = require('../database/MongoDB');
+MongoDB.connect( function(callback) {
+});
+router.get('/', async function (req, res, next) {
+  let statistics = await Statistics.getCrawlerLastRunDate();
   let lastRunDate = null;
-  if (statistics) {
-    lastRunDate = DateTime.fromMillis(statistics.runDate);
+  if (statistics && statistics.length > 0) {
+      console.log("stats", statistics);
+    lastRunDate = DateTime.fromMillis(statistics[0].runDate);
   }
   res.render('index', {title: 'OTT Changelog', lastRunDate: lastRunDate});
 });
 
 /* GET home page. */
-router.get('/articles/crawl', function (req, res, next) {
-  let statistics = Statistics.getCrawlerLastRunDate();
+router.get('/articles/crawl', async function (req, res, next) {
+  let statistics = await Statistics.getCrawlerLastRunDate();
   let lastRunDate = null;
-  if (statistics) {
-    lastRunDate = DateTime.fromMillis(statistics.runDate);
+  if (statistics && statistics.length > 0) {
+    console.log(statistics);
+    lastRunDate = DateTime.fromMillis(statistics[0].runDate);
   }
   res.render('articles-crawl', {title: 'Crawl Articles', lastRunDate: lastRunDate});
   // Crawler.crawl();
 });
 
-router.all('/articles/review', function (req, res, next) {
+router.all('/articles/review',  async function (req, res, next) {
     let startDate = req.body.startdate || moment().startOf('week').format("YYYY-MM-DD");
     let endDate = req.body.enddate || moment().endOf('week').add(1, 'days').format("YYYY-MM-DD");
-    let articles = Article.getAllByFilter(function (o) {
-        return ((o.date > new Date(startDate).getTime() && o.date < new Date(endDate).getTime())  && (o.notes == null) && (!o.ignore))
-    });
+    const query = {"date":{"$gte":new Date(startDate),"$lt":new Date(endDate)}, "notes": null};
+    let articles = await Article.find(query);
     res.render('articles-review', {title: 'Review Articles', articles: articles, startDate: startDate, endDate: endDate});
 });
 
-router.get('/update-note', function (req, res, next) {
-    let article = Article.getAllByFilter(function (o) {
-        return (o.id == req.query.id)
-    })[0];
+router.get('/update-note', async function (req, res, next) {
+    let article = await Article.findOne({"id": req.query.id});
     res.render('update-article', {title: 'Add note to ' + article.title, article: article});
 });
 
-router.post('/update-note', function (req, res, next) {
+router.post('/update-note', async function (req, res, next) {
     let id = req.body.id;
     let newNote = req.body.note;
-    let article = Article.getAllByFilter(function (o) {
-        return (o.id == id)
-    })[0];
+    let article = await Article.findOne({"id": req.body.id});
     if (newNote.toLowerCase() == "ignore") {
-        Article.enableIgnoreById(id);
+        await Article.enableIgnoreById(id);
     } else {
         if (newNote || newNote == "") {
             let notes;
@@ -73,46 +74,43 @@ router.post('/update-note', function (req, res, next) {
             if (newNote.length > 0) {
                 notes.push(newNote)
             }
-            Article.setNotesById(id, notes);
+            await Article.setNotesById(id, notes);
         }
     }
     res.render('update-article', {title: 'Add note to ' + article.title, article: article});
 });
 
-router.all('/articles/view', function (req, res, next) {
+router.all('/articles/view', async function (req, res, next) {
     let startDate = req.body.startdate || moment().startOf('week').format("YYYY-MM-DD");
     let endDate = req.body.enddate || moment().endOf('week').add(1, 'days').format("YYYY-MM-DD");
-    let articles = Article.getAllByFilter(function (o) {
-        return (o.date > new Date(startDate).getTime() && o.date < new Date(endDate).getTime() && !o.ignore)
-    });
+    const query = {"date":{"$gte":new Date(startDate),"$lt":new Date(endDate)}, "ignore": false};
+    let articles = await Article.find(query);
     const mdTable = Markdown.format(articles);
     write("articles.md", mdTable, { overwrite: true });
     res.render('articles-view', {title: 'Articles', articles: articles, startDate: startDate, endDate: endDate});
 });
 
-router.get('/resources/all', function (req, res, next) {
+router.get('/resources/all', async function (req, res, next) {
 
-  let statistics = Statistics.getCrawlerLastRunDate();
+  let statistics = await Statistics.getCrawlerLastRunDate();
   let lastRunDate = null;
   let resources = null;
 
-  if (statistics) {
-    lastRunDate = DateTime.fromMillis(statistics.runDate);
+  if (statistics && statistics.length > 0) {
+    lastRunDate = DateTime.fromMillis(statistics[0].runDate);
   }
   resources = List.getList();
-  function enrichWithNbOfArticles(list) {
+  async function enrichWithNbOfArticles(list) {
     for (let i = 0; i < list.length; i++) {
         for (let j = 0; j < list[i].list.length; j++) {
             let source = list[i].list[j];
-            let nbOfArticles = Article.getAllByFilter( (o) => {
-                return (o.sourceId == source.id)
-            }).length;
+            let nbOfArticles = await Article.count({"sourceId": source.id});
             source.numberOfArticles = nbOfArticles;
         }
     }
     return list;
   }
-  resources = enrichWithNbOfArticles(resources);
+  resources = await enrichWithNbOfArticles(resources);
   res.render('resources-all', {title: 'All Resources', lastRunDate: lastRunDate, resources: resources});
 });
 
@@ -141,7 +139,6 @@ router.get('/crawl-list', async function(req, res) {
 router.post("/crawl-source", async function(req, res) {
     const source = req.body;
     const data = await Crawler.crawlSourceById(source.id);
-    console.log("data", data);
     res.json(data);
 })
 

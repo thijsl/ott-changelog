@@ -12,7 +12,6 @@
     "http-errors": "~1.6.3",
     "install": "^0.13.0",
     "jsdom": "^16.2.1",
-    "lowdb": "1.0.0",
     "luxon": "2.0.1",
     "markdown-table": "^2.0.0",
     "moment": "^2.24.0",
@@ -23,5 +22,8 @@
     "slugify": "^1.4.0",
     "write": "^2.0.0",
     "xmldom": "^0.3.0"
+  },
+  "devDependencies": {
+    "mongodb": "^4.3.1"
   }
 }

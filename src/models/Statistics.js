@@ -1,5 +1,4 @@
-const Database = require('../database/Database.js');
-const DB_NAME = 'statistics';
+const MongoDB = require('../database/MongoDB');
 
 class Statistics {
     constructor(date, resources) {
@@ -13,19 +12,17 @@ class Statistics {
         );
         return statistics;
     }
-    static getStatistics() {
-        return Database.getInstance().db.get(DB_NAME);
+    static async getCrawlerLastRunDate() {
+        const db = MongoDB.getDb();
+        return await db.collection("statistics").find().sort({"runDate": -1}).limit(1).toArray()
     }
-    static getCrawlerLastRunDate() {
-//      return db.data.statistics[0];
-      return this.getStatistics().last().value();
-    }
-    static add(parameters) {
+    static async add(parameters) {
         let statistics = this.create(parameters);
-        this.getStatistics()
-            .push(statistics)
-            .write();
-        return statistics;
+        const db = MongoDB.getDb();
+        const result = await db.collection("statistics").insertOne(
+            statistics
+        );
+        return result;
     }
 }
 

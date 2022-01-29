@@ -45,20 +45,18 @@ class Crawler {
 
                     // console.log("articles", articles);
                     if (articles.length == 0) {
-                        Error.add({
+                        let result = await Error.add({
                             type: "No articles found.",
-                            sourceId: source.id,
-                            date: Date.now()
+                            sourceId: source.id
                         });
                     }
 
                     for (let i = 0; i < articles.length; i++) {
                         let article = articles[i];
                         if (!article.title) {
-                            Error.add({
+                            let result = await Error.add({
                                 type: "No article title found.",
-                                sourceId: source.id,
-                                date: Date.now()
+                                sourceId: source.id
                             });
                         }
                         article.id = (source.id + "-" + slugify(article.title || ""));
@@ -76,10 +74,10 @@ class Crawler {
             }
             console.log("new articles");
             console.log(newArticles);
-            browser.close();
+            await browser.close();
   
-            Statistics.add({
-              runDate: Date.now(),
+            await Statistics.add({
+              runDate: new Date(),
               resources: list
             });
 
@@ -103,10 +101,9 @@ class Crawler {
         // add to db
 
         if (articles.length == 0) {
-            Error.add({
+            let result = await Error.add({
                 type: "No articles found.",
-                sourceId: source.id,
-                date: Date.now()
+                sourceId: source.id
             });
             return {
                 "articles": 0,
@@ -117,15 +114,14 @@ class Crawler {
         for (let i = 0; i < articles.length; i++) {
             let article = articles[i];
             if (!article.title) {
-                Error.add({
+                let result = await Error.add({
                     type: "No article title found.",
-                    sourceId: source.id,
-                    date: Date.now()
+                    sourceId: source.id
                 });
             }
             article.id = (source.id + "-" + slugify(article.title || ""));
             article.sourceId = source.id;
-            article = Article.add(article);
+            article = await Article.add(article);
             if (article) {
                 newArticles++;
             }
@@ -204,16 +200,16 @@ class Crawler {
             if (articles.length == 0) {
                 console.log({
                     type: "No articles found.",
-                    crawlDate: Date.now()
+                    crawlDate: new Date()
                 });
             }
 
-            browser.close();
+            await browser.close();
             return articles;
     }
 
     static async complete() {
-        return Statistics.add({
+        return await Statistics.add({
             runDate: Date.now(),
             resources: []
         });

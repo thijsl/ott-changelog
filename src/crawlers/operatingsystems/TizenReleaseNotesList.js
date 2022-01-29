@@ -16,9 +16,9 @@ class TizenReleaseNotesList extends HTMLPage {
             let id;
             if (date.length > 1) {
                 title = date[0].trim();
-                date = new Date(date[1].split(")")[0]).getTime();
+                date = new Date(date[1].split(")")[0]);
             } else {
-                date = Date.now();
+                date = new Date();
                 id = title;
             }
             let article = {

@@ -14,7 +14,7 @@ class SafariTechnologyPreviewReleaseNotesList extends HTMLPage {
             let article = {
                 title: (divs[i].innerHTML),
                 link: this.url,
-                date: Date.now(),
+                date: new Date(),
                 notes: null,
                 id: divs[i].innerHTML
             };

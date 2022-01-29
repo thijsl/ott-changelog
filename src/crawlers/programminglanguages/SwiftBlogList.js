@@ -14,7 +14,7 @@ class SwiftBlogList extends HTMLPage {
             let article = {
                 title: divs[i].querySelector('a').textContent.trim(),
                 link: this.url.split("/blog/")[0] + divs[i].querySelector('a').href,
-                date: new Date(divs[i].querySelector('time').textContent.trim()).getTime()
+                date: new Date(divs[i].querySelector('time').textContent.trim())
             };
             articles.push(article);
         }

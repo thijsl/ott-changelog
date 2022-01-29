@@ -17,7 +17,7 @@ class WebOSTVSDKReleaseNotesList extends HTMLPage {
                 let article = {
                     title: title.trim(),
                     link: this.url,
-                    date: new Date(date[1].split(")")[0]).getTime()
+                    date: new Date(date[1].split(")")[0])
                 };
                 articles.push(article);
             }

@@ -15,7 +15,7 @@ class GithubXMLPage extends XMLPage {
             let article = {
                 title: items[i].getElementsByTagName('title')[0].textContent.trim(),
                 link: items[i].getElementsByTagName('link')[0].getAttribute('href'),
-                date: new Date(date).getTime()
+                date: new Date(date)
             };
             articles.push(article);
         }

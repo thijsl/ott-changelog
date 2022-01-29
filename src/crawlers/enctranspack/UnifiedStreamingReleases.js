@@ -18,7 +18,7 @@ class UnifiedStreamingReleases extends HTMLPage {
                 if (dateMatch) {
                     let article = {
                         title: title,
-                        date: new Date(dateMatch[0]).getTime(),
+                        date: new Date(dateMatch[0]),
                         link: this.url + versions[i].href
                     };
                     articles.push(article);

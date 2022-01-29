@@ -1,29 +1,26 @@
-const Database = require('../database/Database');
-const DB_NAME = 'errors';
+const MongoDB = require('../database/MongoDB');
 
 class Error {
-    constructor(type, sourceId, date) {
+    constructor(type, sourceId) {
         this.type = type;
         this.sourceId = sourceId;
-        this.date = date;
+        this.date = new Date();
     }
     static create(parameters) {
         let error = new Error(
             parameters.type,
-            parameters.sourceId,
-            parameters.date
+            parameters.sourceId
         );
         return error;
     }
-    static getErrors() {
-        return Database.getInstance().db.get(DB_NAME);
-    }
-    static add(parameters) {
+    static async add(parameters) {
         let error = this.create(parameters);
-        this.getErrors()
-            .push(error)
-            .write();
-        return error;
+        const db = MongoDB.getDb();
+        const result = await db.collection("errors").insertOne(
+            error
+        );
+        console.log("Added error:", result);
+        return result;
     }
 }
 
