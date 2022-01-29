@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const { MongoClient } = require("mongodb");
 
 // moment should be replaced with luxon
 const moment = require('moment');
@@ -18,6 +17,7 @@ const Markdown = require('../util/format/Markdown');
 const Article = require('../models/Article');
 const Statistics = require('../models/Statistics');
 const write = require('write');
+require('dotenv').config()
 
 const MongoDB = require('../database/MongoDB');
 MongoDB.connect( function(callback) {

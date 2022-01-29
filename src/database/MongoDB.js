@@ -1,11 +1,10 @@
 const MongoClient = require( 'mongodb' ).MongoClient;
-const uri = "";
 let _db;
 let _client;
 
 module.exports = {
     connect: async function( callback ) {
-        _client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        _client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         _client.connect(async () => {
             _db = _client.db("ott_changelog");
             callback(_db);

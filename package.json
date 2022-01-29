@@ -24,6 +24,7 @@
     "xmldom": "^0.3.0"
   },
   "devDependencies": {
+    "dotenv": "^14.3.2",
     "mongodb": "^4.3.1"
   }
 }
