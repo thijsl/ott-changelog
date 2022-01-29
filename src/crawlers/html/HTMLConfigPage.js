@@ -62,7 +62,7 @@ class HTMLConfigPage extends HTMLPage {
             if (title && date && link) {
                 let article = {
                     title: title,
-                    date: new Date(date).getTime(),
+                    date: new Date(date),
                     link: link
                 };
                 articles.push(article);

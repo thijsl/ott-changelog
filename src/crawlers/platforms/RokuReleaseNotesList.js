@@ -14,7 +14,7 @@ class RokuReleaseNotesList extends HTMLPage {
         for (let i = 0; i < dates2.length; i++) {
             if (dates2[i].textContent.indexOf(" date") > -1) {
                 let date4 = dates2[i].parentNode.textContent.split("date: ")[1];
-                dates.push(new Date(date4).getTime());
+                dates.push(new Date(date4));
             }
         }
         let articles = [];

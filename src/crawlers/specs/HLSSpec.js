@@ -11,7 +11,7 @@ class HLSSpec extends HTMLPage {
         const article = {
             title: this.document.querySelectorAll('.h1')[1].textContent.trim(),
             link: this.document.querySelectorAll('.noprint a')[this.document.querySelectorAll('.noprint a').length-2].href,
-            date: Date.now(),
+            date: new Date(),
             id: this.document.querySelectorAll('.h1')[1].textContent.trim()
         };
         return [article];

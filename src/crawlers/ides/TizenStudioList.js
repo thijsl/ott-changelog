@@ -11,7 +11,7 @@ class TizenStudioList extends HTMLPage {
       let articles = [];
       let title = this.document.body.querySelectorAll('.markdown-body h1')[0].textContent;
       let dateText = this.document.body.querySelectorAll('.markdown-body li')[0].textContent.split(":")[1];
-      let date = new Date(dateText).getTime();
+      let date = new Date(dateText);
       let article = {
         title: title,
         link: this.url,

@@ -15,7 +15,7 @@ class WebKitBlogList extends HTMLPage {
                 title: divs[i].innerHTML,
                 link: divs[i].href,
                 id: divs[i].innerHTML,
-                date: Date.now()
+                date: new Date()
             };
             articles.push(article);
         }

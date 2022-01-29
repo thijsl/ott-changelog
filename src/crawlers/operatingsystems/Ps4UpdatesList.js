@@ -12,7 +12,7 @@ class Ps4UpdatesList extends HTMLPage {
         let articles = [
             {
                 title: title[title.length-1],
-                date: new Date(this.document.body.querySelector('p').textContent.split(".")[0].split("on ")[1]).getTime(),
+                date: new Date(this.document.body.querySelector('p').textContent.split(".")[0].split("on ")[1]),
                 link: this.url
             }
         ];

@@ -10,7 +10,7 @@ class THEOplayerReleasesList extends HTMLPage {
     parse() {
         let releases = this.document.body.querySelectorAll('.changelog h2');
         let articles = [];
-        let date = Date.now();
+        let date = new Date();
         let gotDate = false;
         for (let i = 0; i < releases.length; i++) {
             let release = releases[i].textContent;
@@ -19,13 +19,13 @@ class THEOplayerReleasesList extends HTMLPage {
                 let date = release[1].split(")");
                 release = release[0];
                 if (date.length > 1) {
-                    date = new Date(date[0]).getTime();
+                    date = new Date(date[0]);
                     gotDate = true;
                 } else {
-                    date = Date.now();
+                    date = new Date();
                 }
                 if (isNaN(date)) {
-                    date = Date.now();
+                    date = new Date();
                 }
                 let link = this.url + releases[i].querySelector('a').getAttribute("href");
                 let article = {

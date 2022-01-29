@@ -11,7 +11,7 @@ class GoogleCastReleaseNotesList extends HTMLPage {
         let divs = this.document.body.querySelectorAll('.devsite-article-body h3');
         let articles = [];
         for (let i = 0; i < divs.length; i++) {
-            let date = new Date(divs[i].textContent).getTime();
+            let date = new Date(divs[i].textContent);
             if (!isNaN(date)) {
                 let article = {
                     title: divs[i].textContent.trim(),

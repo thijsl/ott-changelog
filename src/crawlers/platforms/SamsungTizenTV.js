@@ -11,7 +11,7 @@ class SamsungTizenTV extends HTMLPage {
         let title = this.document.querySelectorAll('table tr th')[1].textContent.trim();
         let article = {
             title: title,
-            date: Date.now(),
+            date: new Date(),
             id: title,
             link: this.url
         };

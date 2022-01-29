@@ -1,5 +1,4 @@
-const Database = require('../database/Database');
-const DB_NAME = 'articles';
+const MongoDB = require('../database/MongoDB');
 
 class Article {
     constructor(title, date, link, notes, id, sourceId, content) {
@@ -10,6 +9,7 @@ class Article {
         this.id = id;
         this.sourceId = sourceId;
         this.content = content;
+        this.createdAt = new Date();
     }
     static create(articleParameters) {
         let article = new Article(
@@ -22,52 +22,76 @@ class Article {
             null);
         return article;
     }
-    static getArticles() {
-        return Database.getInstance().db.get(DB_NAME);
-    }
-    static add(articleParameters) {
+    static async add(articleParameters) {
         let article = this.create(articleParameters);
-        let exists = this.exists(article.id, article.sourceId);
-        if (!exists) {
-            this.getArticles()
-                .push(article)
-                .write();
-            return article;
-        } else {
-            return null;
-        }
+        const db = MongoDB.getDb();
+        const result = await db.collection("articles").updateOne(
+            {
+                "sourceId": article.sourceId,
+                "id": article.id
+            },
+            {
+                "$set": {
+                    "title": article.title,
+                    "date": article.date,
+                    "link": article.link,
+                    "id": article.id,
+                    "sourceId": article.sourceId
+                }
+            },
+            {
+                "upsert": true
+            }
+        );
+        return article;
     }
     static remove(id) {
 
     }
-    static getAll(id, sourceId) {
-        let articles = this.getArticles().filter({sourceId: sourceId, id: id}).value();
+    static async find(query) {
+        const db = MongoDB.getDb();
+        let articles = await db.collection("articles").find(query).toArray();
         return articles;
     }
-    static exists(id, sourceId) {
-        let articles = this.getAll(id, sourceId);
-        let exists = (articles.length > 0);
-        return exists;
-
+    static async findOne(query) {
+        const db = MongoDB.getDb();
+        let article = await db.collection("articles").findOne(query);
+        return article;
+    }
+    static async count(query) {
+        const db = MongoDB.getDb();
+        let nbOfArticles = await db.collection("articles").find(query).count();
+        return nbOfArticles;
+    }
+    static async enableIgnoreById(id) {
+        const db = MongoDB.getDb();
+        const result = await db.collection("articles").updateOne(
+            {
+                "id": id
+            },
+            {
+                "$set": {
+                    "ignore": true
+                }
+            }
+        );
+        return result;
     }
 
-    static getAllByFilter(filter) {
-        let articles = this.getArticles().filter(filter).value();
-        return articles;
-    }
-
-    static enableIgnoreById(id) {
-        this.getArticles()
-            .find({ id: id })
-            .assign({ ignore: true})
-            .write();
-    }
-
-    static setNotesById(id, notes) {
-        this.getArticles()
-            .find({id: id})
-            .assign({notes: notes})
-            .write();
+    static async setNotesById(id, notes) {
+        const db = MongoDB.getDb();
+        const result = await db.collection("articles").updateOne(
+            {
+                "id": id
+            },
+            {
+                "$set": {
+                    "notes": notes,
+                    "ignore": false
+                }
+            }
+        );
+        return result;
     }
 }
 

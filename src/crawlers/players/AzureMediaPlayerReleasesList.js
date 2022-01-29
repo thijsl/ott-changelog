@@ -18,16 +18,16 @@ class AzureMediaPlayerReleasesList extends HTMLPage {
                 release = date[0].substr(0, date[0].length-1);
                 date = date[1].split(")");
                 if (date.length > 1) {
-                    date = new Date(date[0]).getTime();
+                    date = new Date(date[0]);
                 } else {
-                    date = Date.now();
+                    date = new Date();
                 }
             } else {
-                date = Date.now();
+                date = new Date();
             }
             if (isNaN(date)) {
                 id = release;
-                date = Date.now();
+                date = new Date();
             }
             let article = {
                 title: release,

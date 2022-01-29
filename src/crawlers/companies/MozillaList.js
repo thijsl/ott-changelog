@@ -14,7 +14,7 @@ class MozillaList extends XMLPage {
             let article = {
                 title: items[i].getElementsByTagName('title')[0].textContent.trim(),
                 link: items[i].getElementsByTagName('link')[0].textContent.trim(),
-                date: new Date(items[i].getElementsByTagName('pubDate')[0].textContent.trim()).getTime()
+                date: new Date(items[i].getElementsByTagName('pubDate')[0].textContent.trim())
             };
             articles.push(article);
         }

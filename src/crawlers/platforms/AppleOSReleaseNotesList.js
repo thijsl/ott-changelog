@@ -24,7 +24,7 @@ class AppleOSReleaseNotesList extends HTMLPage {
             let article = {
                 title: title,
                 link: link,
-                date: Date.now(),
+                date: new Date(),
                 id: title
             };
             articles.push(article);

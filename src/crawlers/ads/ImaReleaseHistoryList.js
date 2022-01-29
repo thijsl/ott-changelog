@@ -21,7 +21,7 @@ class ImaReleaseHistoryList extends HTMLPage {
                 let article = {
                     title: columns[0].textContent.trim(),
                     link: this.url,
-                    date: new Date(columns[1].textContent.trim()).getTime(),
+                    date: new Date(columns[1].textContent.trim()),
                     notes: null
                 };
                 articles.push(article);

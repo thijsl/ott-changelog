@@ -13,7 +13,7 @@ class Twitch extends HTMLPage {
         let articles = [
             {
                 title: this.document.querySelector('h2 a').textContent.trim(),
-                date: new Date(date).getTime(),
+                date: new Date(date),
                 link: "https://blog.twitch.tv" + this.document.querySelector('h2 a').href
             }
         ];
@@ -24,7 +24,7 @@ class Twitch extends HTMLPage {
             date = date[2] + "/" + date[3] + "/" + date[4];
             let article = {
                 title: item.querySelector('h3 a').textContent.trim(),
-                date: new Date(date).getTime(),
+                date: new Date(date),
                 link: "https://blog.twitch.tv" + item.querySelector('h3 a').href
             };
             articles.push(article);

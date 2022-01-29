@@ -14,7 +14,7 @@ class EncodingComAPIChanges extends HTMLPage {
             let date = items[i].textContent.trim().split(" -")[0];
             let article = {
                 title: date,
-                date: new Date(date).getTime(),
+                date: new Date(date),
                 link: this.url + items[i].href.split("/changelog")[1]
             };
             articles.push(article);

@@ -14,7 +14,7 @@ class HTMLGooglePage extends HTMLPage {
             let article = {
                 title: divs[i].querySelector('.title > a').textContent.trim(),
                 link: divs[i].querySelector('.title > a').href,
-                date: new Date(divs[i].querySelector('.publishdate').textContent.trim()).getTime()
+                date: new Date(divs[i].querySelector('.publishdate').textContent.trim())
             };
             articles.push(article);
         }

@@ -10,9 +10,6 @@ This project now hosts the technology that was powering that blog series.
 
 * Add a /articles/get?sourceId=<sourceId> page that lists all articles for a specific source (e.g. HLS), and sorts them from newest to oldest.
 * Open the correct /articles/get?sourceId=<sourceId> page when clicking the source ID in the /articles/crawl list.
-* Change DB from `lowdb` to MongoDB.
-  * Allow users to configure https://www.mongodb.com/atlas/database through a login.
-  If these credentials are available, uses that cloud database instead of the local MongoDB storage.
 * Improve the UX of reviewing articles.
 * Add automatic "CRON"-like crawling, and automatically email (e.g. weekly) digest.
 
@@ -20,7 +17,9 @@ This project now hosts the technology that was powering that blog series.
 
 1. Run `npm install` to install the dependencies.
 2. Run `npm run start` to start the local web server.
-3. Go to `http://localhost:3000/` to use the web app GUI.
+3. Create an `.env` in the root folder and set your `MONGODB_URI=mongodb+srv://<username>:<password>@<domain>` to connect with your MongoDB.
+   1. You can grab a free cloud-hosted MongoDB at https://docs.atlas.mongodb.com/tutorial/deploy-free-tier-cluster/.
+4. Go to `http://localhost:3000/` to use the web app GUI.
 
 Then,
 1. Select `Crawl` to index new items.
