@@ -43,6 +43,9 @@ class Article {
                 "upsert": true
             }
         );
+        if (result.upsertedCount == 0) {
+            return false;
+        }
         return article;
     }
     static remove(id) {
