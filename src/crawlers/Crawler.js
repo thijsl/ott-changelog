@@ -126,6 +126,7 @@ class Crawler {
                 newArticles++;
             }
         }
+        await browser.close();
         return {"articles": articles, "newArticles": newArticles};
     }
 
@@ -138,7 +139,7 @@ class Crawler {
             await page.setUserAgent(USER_AGENT);
         }
 
-        await page.goto(source.link);
+        await page.goto(source.link, {waitUntil: "networkidle2"});
 
         if (source.querySelectorParam) {
             const selector1 = await page.waitForSelector(source.querySelectorParam);
