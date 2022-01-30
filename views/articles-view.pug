@@ -3,7 +3,7 @@ extends layout
 block content
   a(href='/') << Index
   h1= title
-  form(method='POST' action='/view-articles')
+  form(method='POST' action='/articles/view')
     div
       label(for='startdate') Start Date:
       input(type='date', value=startDate name='startdate')
