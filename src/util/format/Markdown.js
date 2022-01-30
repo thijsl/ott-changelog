@@ -36,9 +36,9 @@ class Markdown {
             if (sourceIndexOf > -1) {
                 let notes = "";
                 if (article.notes && article.notes.length > 0) {
-                    notes = "<ul>";
+                    notes = " <ul>";
                     for (let j = 0; j < article.notes.length; j++) {
-                        notes = notes + "<li>" + article.notes[j] + "</li>";
+                        notes = notes + ` <li>${article.notes[j]}</li>`;
                     }
                     notes = notes + "</ul>";
                 }
