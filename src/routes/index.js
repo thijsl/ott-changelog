@@ -20,8 +20,13 @@ const write = require('write');
 require('dotenv').config()
 
 const MongoDB = require('../database/MongoDB');
-MongoDB.connect( function(callback) {
+MongoDB.connect( function(error) {
+    if (error) {
+        console.error("Couldn't connect to MongoDB.");
+        process.exit(1);
+    }
 });
+
 router.get('/', async function (req, res, next) {
   let statistics = await Statistics.getCrawlerLastRunDate();
   let lastRunDate = null;
