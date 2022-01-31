@@ -20,7 +20,7 @@ const list = [
     {id: "fame", link: 'https://websites.fraunhofer.de/video-dev/feed/', parser: MicrosoftXMLPage, prettyName: "FAME"},
     {id: "hotstar", link: 'https://blog.hotstar.com/feed', parser: MediumXMLPage, prettyName: "Hotstar"},
     {id: "hulu", link: 'https://medium.com/feed/hulu-tech-blog', parser: MediumXMLPage, prettyName: "Hulu"},
-    {id: "jwplayer", link: 'https://www.jwplayer.com/blog/', parser: HTMLConfigPage, prettyName: "JW Player", itemsConfig: {selector: '.resource-list-card'}, titleConfig: {selector: '.title'}, dateConfig: {selector: '.post-date', attribute: 'datetime'}, linkConfig: {splitConfig: {value: "/blog/", index: 1}}},
+    {id: "jwplayer", link: 'https://www.jwplayer.com/blog/rss.xml', parser: MicrosoftXMLPage, prettyName: "JW Player", itemsConfig: {selector: '.resource-list-card'}, titleConfig: {selector: '.title'}, dateConfig: {selector: '.post-date', attribute: 'datetime'}, linkConfig: {splitConfig: {value: "/blog/", index: 1}}},
     {id: "kaySingh", link: 'https://www.singhkays.com/blog/index.xml', parser: MicrosoftXMLPage, prettyName: "Kay Singh"},
     {id: "mux", link: 'https://mux.com/blog/rss', parser: MediumXMLPage, prettyName: "Mux"},
     {id: "netflix", link: 'https://netflixtechblog.com/feed', parser: MediumXMLPage, prettyName: "Netflix"},

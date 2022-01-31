@@ -17,7 +17,7 @@ const list = [
     {id: "exoplayer", link: 'https://github.com/google/ExoPlayer/releases.atom', parser: GithubXMLPage, prettyName: "ExoPlayer"},
     {id: "flowplayer", link: 'https://github.com/flowplayer/flowplayer/releases.atom', parser: GithubXMLPage, prettyName: "Flowplayer"},
     {id: "hlsJs", link: 'https://github.com/video-dev/hls.js/releases.atom', parser: GithubXMLPage, prettyName: "hls.js"},
-    {id: "juvoPlayer", link: 'https://github.com/SamsungDForum/JuvoPlayer', parser: juvoPlayer, prettyName: "JuvoPlayer"},
+    {id: "juvoPlayer", link: 'https://github.com/SamsungDForum/JuvoPlayer/commits/master.atom', parser: GithubXMLPage, prettyName: "JuvoPlayer"},
     {id: "jwPlayerAndroid", link: 'https://releases.jwplayer.com/android-sdk', parser: jwPlayer, prettyName: "JW Player Android"},
     // {id: "jwPlayerFireTV", link: 'https://www.jwplayer.com/release-notes/fireos-sdk/', parser: jwPlayer, prettyName: "JW Player FireOS"},
     {id: "jwPlayerIOS", link: 'https://releases.jwplayer.com/ios-sdk', parser: jwPlayer, prettyName: "JW Player iOS"},
