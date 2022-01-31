@@ -1,5 +1,3 @@
-console.log("test");
-
 const renderList = (list) => {
     let nbOfResources = 0;
     const div1 = document.createElement('div');
