@@ -8,7 +8,7 @@ class TizenReleaseNotesList extends HTMLPage {
 
     // https://developer.tizen.org/tizen/tizen/release-notes
     parse() {
-        let releases = this.document.body.querySelectorAll('.expanded .td-data-lnb > a');
+        let releases = this.document.body.querySelectorAll('.is-active .is-active ul.docs-sidebar.depth-3rd li a');
         let articles = [];
         for (let i = 0; i < releases.length; i++) {
             let title = releases[i].textContent.trim();
@@ -23,7 +23,7 @@ class TizenReleaseNotesList extends HTMLPage {
             }
             let article = {
                 title: title,
-                link: "https://developer.tizen.org" + releases[i].href,
+                link: releases[i].href,
                 date: date,
                 id: id
             };

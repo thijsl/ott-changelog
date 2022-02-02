@@ -23,7 +23,7 @@ const list = [
     {id: "jwPlayerIOS", link: 'https://releases.jwplayer.com/ios-sdk', parser: jwPlayer, prettyName: "JW Player iOS"},
     {id: "jwPlayerWeb", link: 'https://releases.jwplayer.com/jw-player', parser: jwPlayer, prettyName: "JW Player Web"},
     {id: "mediaElementJs", link: 'https://github.com/mediaelement/mediaelement/releases.atom', parser: GithubXMLPage, prettyName: "MediaElementJs"},
-    {id: "radiantMediaPlayer", link: 'https://www.radiantmediaplayer.com/version-history.html', parser: radiantMediaPlayer, prettyName: "Radiant Media Player"},
+    {id: "radiantMediaPlayer", link: 'https://www.radiantmediaplayer.com/version-history.html', parser: radiantMediaPlayer, prettyName: "Radiant Media Player", userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"},
     {id: "reactNativeVideo", link: 'https://github.com/react-native-community/react-native-video/releases.atom', parser: GithubXMLPage, prettyName: "React Native Video"},
     {id: "shakaPlayer", link: 'https://github.com/google/shaka-player/releases.atom', parser: GithubXMLPage, prettyName: "Shaka Player"},
     {id: "theoplayer", link: 'https://docs.portal.theoplayer.com/changelog.md', parser: theoplayer, prettyName: "THEOplayer"},

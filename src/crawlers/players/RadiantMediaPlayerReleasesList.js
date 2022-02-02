@@ -23,7 +23,6 @@ class RadiantMediaPlayerReleasesList extends HTMLPage {
             release = release.innerHTML.split(" - ");
             if (releases[i].getAttribute("id")) {
                 var article = {
-                    id: id,
                     title: release[0],
                     link: this.url + "#" + releases[i].getAttribute("id"),
                     date: new Date(date)
