@@ -14,7 +14,7 @@ const list = [
     {id: "rokuReleases", link: 'https://developer.roku.com/en-gb/docs/developer-program/release-notes/roku-os-release-notes.md', parser: rokuReleases, querySelectorParam: '#roku-os-release-notes', prettyName: "Roku"},
     {id: "SamsungTv", link: 'https://developer.samsung.com/smarttv/develop/specifications/general-specifications.html', parser: SamsungTv, prettyName: "Samsung Tizen"},
     {id: "tvOSReleases", link: 'https://developer.apple.com/documentation/tvos_release_notes', parser: AppleOSReleaseNotesList, prettyName: "tvOS"},
-    {id: "webosReleases", link: 'http://webostv.developer.lge.com/sdk/release-notes/', parser: webosReleases, prettyName: "LG webOS"},
+    {id: "webosReleases", link: 'https://webostv.developer.lge.com/sdk/installation/release-notes/', parser: webosReleases, prettyName: "LG webOS"},
 ];
 
 module.exports = list;

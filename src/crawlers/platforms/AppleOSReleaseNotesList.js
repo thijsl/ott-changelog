@@ -8,7 +8,7 @@ class AppleOSReleaseNotesList extends HTMLPage {
 
     // https://developer.apple.com/documentation/ios_ipados_release_notes
     parse() {
-        let divs = this.document.body.querySelectorAll('.task-topic-info a');
+        let divs = this.document.body.querySelectorAll('.section-content a');
         let articles = [];
         for (let i = 0; i < divs.length; i++) {
             let link = divs[i].href;
