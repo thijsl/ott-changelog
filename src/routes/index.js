@@ -20,6 +20,7 @@ const write = require('write');
 require('dotenv').config()
 
 const MongoDB = require('../database/MongoDB');
+const ObjectId = require('mongodb').ObjectId;
 MongoDB.connect( function(error) {
     if (error) {
         console.error("Couldn't connect to MongoDB.");
@@ -58,16 +59,16 @@ router.all('/articles/review',  async function (req, res, next) {
 });
 
 router.get('/update-note', async function (req, res, next) {
-    let article = await Article.findOne({"id": req.query.id});
+    let article = await Article.findOne({"_id": new ObjectId(req.query.id)});
     res.render('update-article', {title: 'Add note to ' + article.title, article: article});
 });
 
 router.post('/update-note', async function (req, res, next) {
     let id = req.body.id;
     let newNote = req.body.note;
-    let article = await Article.findOne({"id": req.body.id});
+    let article = await Article.findOne({"_id": new ObjectId(req.body.id)});
     if (newNote.toLowerCase() == "ignore") {
-        await Article.enableIgnoreById(id);
+        await Article.enableIgnoreById(new ObjectId(id));
     } else {
         if (newNote || newNote == "") {
             let notes;
@@ -79,7 +80,7 @@ router.post('/update-note', async function (req, res, next) {
             if (newNote.length > 0) {
                 notes.push(newNote)
             }
-            await Article.setNotesById(id, notes);
+            await Article.setNotesById(new ObjectId(id), notes);
         }
     }
     res.render('update-article', {title: 'Add note to ' + article.title, article: article});

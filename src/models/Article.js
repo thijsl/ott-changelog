@@ -85,7 +85,7 @@ class Article {
         const db = MongoDB.getDb();
         const result = await db.collection("articles").updateOne(
             {
-                "id": id
+                "_id": id
             },
             {
                 "$set": {

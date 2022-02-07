@@ -10,7 +10,7 @@ block content
     div
       label(for='note') note:
       textarea(type='text', placeholder='A note' name='note')
-      input(type='hidden', value=''+article.id name='id')
+      input(type='hidden', value=''+article._id name='id')
 
     button(type='submit') Add note
   a(href='/articles/review') << Back to Review Articles

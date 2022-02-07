@@ -16,7 +16,7 @@ block content
     each article in articles
       tr
         td
-          a(href='/update-note?id='+article.id) #{article.id}
+          a(href='/update-note?id='+article._id) #{article.id}
         td= article.title
         td= article.sourceId
         td= new Date(article.date).getFullYear() + "/" + (new Date(article.date).getMonth()+1) + "/" + new Date(article.date).getDate()
