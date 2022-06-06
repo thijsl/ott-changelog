@@ -8,7 +8,7 @@ class XboxOneUpdatesList extends HTMLPage {
 
     // https://support.xbox.com/en-US/help/hardware-network/settings-updates/whats-new-xbox-one-system-updates
     parse() {
-        let versions = this.document.body.querySelectorAll('.expander-111');
+        let versions = this.document.body.querySelectorAll('.expander-169');
         let articles = [];
 
         for (let i = 0; i < versions.length; i++) {
